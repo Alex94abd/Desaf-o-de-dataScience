@@ -1,0 +1,209 @@
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_1%20.csv"
+url2 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_2.csv"
+url3 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_3.csv"
+url4 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_4.csv"
+
+tienda = pd.read_csv(url)
+tienda2 = pd.read_csv(url2)
+tienda3 = pd.read_csv(url3)
+tienda4 = pd.read_csv(url4)
+
+tienda.head()
+
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_1%20.csv"
+url2 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_2.csv"
+url3 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_3.csv"
+url4 = "https://raw.githubusercontent.com/alura-es-cursos/challenge1-data-science-latam/refs/heads/main/base-de-datos-challenge1-latam/tienda_4.csv"
+
+tienda = pd.read_csv(url)
+tienda2 = pd.read_csv(url2)
+tienda3 = pd.read_csv(url3)
+tienda4 = pd.read_csv(url4)
+
+tienda.head()
+
+ingreso_tienda1 = tienda['Precio'].sum()
+ingreso_tienda2 = tienda2['Precio'].sum()
+ingreso_tienda3 = tienda3['Precio'].sum()
+ingreso_tienda4 = tienda4['Precio'].sum()
+
+ingresos_totales = pd.DataFrame({
+    'Tienda': ['tienda', 'tienda2', 'tienda3', 'tienda4'],
+    'Ingreso Total': [ingreso_tienda1, ingreso_tienda2, ingreso_tienda3, ingreso_tienda4]
+})
+
+ventas_tienda1 = tienda.groupby('Categoría del Producto')['Precio'].count().reset_index(name='Cantidad')
+ventas_tienda2 = tienda2.groupby('Categoría del Producto')['Precio'].count().reset_index(name='Cantidad')
+ventas_tienda3 = tienda3.groupby('Categoría del Producto')['Precio'].count().reset_index(name='Cantidad')
+ventas_tienda4 = tienda4.groupby('Categoría del Producto')['Precio'].count().reset_index(name='Cantidad')
+
+print("Ventas por categoría - Tienda 1:\n", ventas_tienda1, "\n")
+print("Ventas por categoría - Tienda 2:\n", ventas_tienda2, "\n")
+print("Ventas por categoría - Tienda 3:\n", ventas_tienda3, "\n")
+print("Ventas por categoría - Tienda 4:\n", ventas_tienda3, "\n")
+
+prom_tienda = tienda['Calificación'].mean()
+prom_tienda2 = tienda2['Calificación'].mean()
+prom_tienda3 = tienda3['Calificación'].mean()
+prom_tienda4 = tienda4['Calificación'].mean()
+
+calificaciones = pd.DataFrame({
+    'Tienda': ['Tienda 1', 'Tienda 2', 'Tienda 3', 'Tienda 4'],
+    'Calificación Promedio': [prom_tienda, prom_tienda2, prom_tienda3, prom_tienda4]
+})
+
+import matplotlib.pyplot as plt
+
+plt.bar(calificaciones['Tienda'], calificaciones['Calificación Promedio'], color='skyblue')
+plt.title('Calificación Promedio de Clientes por Tienda')
+plt.xlabel('Tienda')
+plt.ylabel('Calificación Promedio')
+plt.ylim(0, 5)  # Asumiendo escala de 1 a 5
+plt.show()
+
+ventas_tienda = tienda['Producto'].value_counts().reset_index()
+ventas_tienda1.columns = ['Producto', 'Cantidad']
+
+ventas_tienda2 = tienda2['Producto'].value_counts().reset_index()
+ventas_tienda2.columns = ['Producto', 'Cantidad']
+
+ventas_tienda3 = tienda3['Producto'].value_counts().reset_index()
+ventas_tienda3.columns = ['Producto', 'Cantidad']
+
+ventas_tienda4 = tienda4['Producto'].value_counts().reset_index()
+ventas_tienda4.columns
+
+mas_vendido_1 = ventas_tienda1.iloc[0]
+menos_vendido_1 = ventas_tienda1.iloc[-1]
+
+mas_vendido_2 = ventas_tienda2.iloc[0]
+menos_vendido_2 = ventas_tienda2.iloc[-1]
+
+mas_vendido_3 = ventas_tienda3.iloc[0]
+menos_vendido_3 = ventas_tienda3.iloc[-1]
+
+mas_vendido_4 = ventas_tienda4.iloc[0]
+menos_vendido_4 = ventas_tienda4
+
+print("🔹 Tienda 1")
+print(f"Más vendido: {mas_vendido_1['Producto']} ({mas_vendido_1['Cantidad']} ventas)")
+print(f"Menos vendido: {menos_vendido_1['Producto']} ({menos_vendido_1['Cantidad']} ventas)\n")
+
+print("🔹 Tienda 2")
+print(f"Más vendido: {mas_vendido_2['Producto']} ({mas_vendido_2['Cantidad']} ventas)")
+print(f"Menos vendido: {menos_vendido_2['Producto']} ({menos_vendido_2['Cantidad']} ventas)\n")
+
+print("🔹 Tienda 3")
+print(f"Más vendido: {mas_vendido_3['Producto']} ({mas_vendido_3['Cantidad']} ventas)")
+print(f"Menos vendido: {menos_vendido_3['Producto']} ({menos_vendido_3['Cantidad']} ventas)\n")
+
+print("🔹 Tienda 4")
+print(f"Más vendido: {mas_vendido_4['Producto']} ({mas_vendido_4['count']} ventas)")
+print(f"Menos vendido: {menos_vendido_4.iloc[-1]['Producto']} ({menos_vendido_4.iloc[-1]['count']} ventas)")
+
+fig, axs = plt.subplots(2, 2, figsize=(16, 10))
+
+# Tienda 1
+axs[0, 0].barh(ventas_tienda1['Producto'].head(5), ventas_tienda1['Cantidad'].head(5), color='lightgreen')
+axs[0, 0].invert_yaxis()
+axs[0, 0].set_title('Top 5 - Tienda 1')
+axs[0, 0].set_xlabel('Cantidad Vendida')
+
+# Tienda 2
+axs[0, 1].barh(ventas_tienda2['Producto'].head(5), ventas_tienda2['Cantidad'].head(5), color='lightblue')
+axs[0, 1].invert_yaxis()
+axs[0, 1].set_title('Top 5 - Tienda 2')
+axs[0, 1].set_xlabel('Cantidad Vendida')
+
+# Tienda 3
+axs[1, 0].barh(ventas_tienda3['Producto'].head(5), ventas_tienda3['Cantidad'].head(5), color='salmon')
+axs[1, 0].invert_yaxis()
+axs[1, 0].set_title('Top 5 - Tienda 3')
+axs[1, 0].set_xlabel('Cantidad Vendida')
+
+# Tienda 4
+axs[1, 1].barh(ventas_tienda4['Producto'].head(5), ventas_tienda4['count'].head(5), color='violet')
+axs[1, 1].invert_yaxis()
+axs[1, 1].set_title('Top 5 - Tienda 4')
+axs[1, 1].set_xlabel('Cantidad Vendida')
+
+plt.tight_layout()
+plt.show()
+
+prom_envio_tienda1 = tienda['Costo de envío'].mean()
+prom_envio_tienda2 = tienda2['Costo de envío'].mean()
+prom_envio_tienda3 = tienda3['Costo de envío'].mean()
+prom_envio_tienda4 = tienda4['Costo de envío'].mean()
+
+costos_envio = pd.DataFrame({
+    'Tienda': ['Tienda 1', 'Tienda 2', 'Tienda 3', 'Tienda 4'],
+    'Costo de Envío Promedio': [
+        prom_envio_tienda1,
+        prom_envio_tienda2,
+        prom_envio_tienda3,
+        prom_envio_tienda4
+    ]
+})
+
+print("Costo de envío promedio por tienda:")
+print(costos_envio)
+
+plt.bar(costos_envio['Tienda'], costos_envio['Costo de Envío Promedio'], color='orange')
+plt.title('Costo de Envío Promedio por Tienda')
+plt.xlabel('Tienda')
+plt.ylabel('Costo Promedio (pagado por el cliente)')
+plt.show()
+
+ingresos = {
+    'Tienda 1': tienda['Precio'].sum(),
+    'Tienda 2': tienda2['Precio'].sum(),
+    'Tienda 3': tienda3['Precio'].sum(),
+    'Tienda 4': tienda4['Precio'].sum()
+}
+
+plt.figure(figsize=(8,5))
+plt.bar(ingresos.keys(), ingresos.values(), color=['#66c2a5','#fc8d62','#8da0cb','#e78ac3'])
+plt.title('💰 Ingreso Total por Tienda')
+plt.xlabel('Tienda')
+plt.ylabel('Ingreso Total (en moneda local)')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+todas_las_tiendas = pd.concat([tienda, tienda2, tienda3, tienda4])
+categorias = todas_las_tiendas['Categoría del Producto'].value_counts()
+
+plt.figure(figsize=(7,7))
+plt.pie(categorias, labels=categorias.index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Pastel1.colors)
+plt.title('🛍️ Distribución de Categorías de Productos (Todas las Tiendas)')
+plt.show()
+
+calificaciones = [
+    tienda['Calificación'].mean(),
+    tienda2['Calificación'].mean(),
+    tienda3['Calificación'].mean(),
+    tienda4['Calificación'].mean()
+]
+
+envios = [
+    tienda['Costo de envío'].mean(),
+    tienda2['Costo de envío'].mean(),
+    tienda3['Costo de envío'].mean(),
+    tienda4['Costo de envío'].mean()
+]
+
+plt.figure(figsize=(8,6))
+plt.scatter(envios, calificaciones, color='teal', s=100)
+for i, tienda in enumerate(['Tienda 1', 'Tienda 2', 'Tienda 3', 'Tienda 4']):
+    plt.text(envios[i] + 0.02, calificaciones[i], tienda)
+
+plt.title('📦 Relación entre Costo de Envío y Calificación Promedio')
+plt.xlabel('Costo de Envío Promedio (pagado por cliente)')
+plt.ylabel('Calificación Promedio del Cliente')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
+
+
