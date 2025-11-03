@@ -22,7 +22,7 @@ A través de **visualizaciones gráficas** generadas con Python y **Matplotlib**
 El proyecto fue desarrollado en **Google Colab** utilizando **Python** y bibliotecas de análisis y visualización de datos.  
 
 ### Archivos principales:
-- `tienda.csv`, `tienda2.csv`, `tienda3.csv`, `tienda4.csv`: Datos de cada tienda.  
+- `tienda_1.csv`, `tienda_2.csv`, `tienda_3.csv`, `tienda_4.csv`: Datos de cada tienda.  
 - `DesafioAlexisBenitez.ipynb`: Notebook principal con todos los pasos del análisis.  
 - `README.md`: Documento explicativo del proyecto (este archivo).  
 
